@@ -1,10 +1,14 @@
 # img-conv
 
-A powerful command-line tool for batch image processing that converts images between formats (JPEG, PNG, WEBP) with optimization and detailed reporting.
+A powerful command-line tool for batch image processing that converts images (JPG, JPEG, PNG, WEBP) to webp with optimization and detailed reporting.
 
 ## TO-DO
-
--Automatic Validation of markdown files.
+- Semantic Versioning
+- Dev Branch
+- Automatic Validation of markdown files.  
+- Python tooling (Ruff, black, basedpyright, etc)
+- Unit Tests
+- Integration Tests
 
 ## Features
 
@@ -29,28 +33,32 @@ See detailed installation instructions: [docs/installation.md](docs/installation
 
 ```bash
 # Clone and setup
-git clone <repository-url>
+git clone git@github.com:danielmacuare/img-conv.git
 cd img-conv
 
 # Install uv (if not already installed)
 curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 # or: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
 
-# Set up project (creates venv and installs dependencies)
+# Option 1: Local development (recommended for contributors)
 uv sync
+
+# Option 2: Global installation (recommended for end users)
+uv tool install .
 ```
 
 ### Basic Usage
 
 ```bash
-# Show images in current directory
+# Local development (after uv sync)
 uv run img-conv show
-
-# Convert images to WEBP format
 uv run img-conv convert --source-dir ./images --output-extension webp
-
-# Delete non-WEBP images (dry run)
 uv run img-conv delete --source-dir ./images
+
+# Global installation (after uv tool install .)
+img-conv show
+img-conv convert --source-dir ./images --output-extension webp
+img-conv delete --source-dir ./images
 ```
 
 ## Documentation
@@ -63,11 +71,11 @@ uv run img-conv delete --source-dir ./images
 
 ## Commands Overview
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `show` | Display image information | `uv run img-conv show -s ./photos` |
-| `convert` | Convert images to specified format | `uv run img-conv convert -e webp` |
-| `delete` | Remove images by extension | `uv run img-conv delete -r png -y` |
+| Command | Description | Local Development | Global Installation |
+|---------|-------------|-------------------|-------------------|
+| `show` | Display image information | `uv run img-conv show -s ./photos` | `img-conv show -s ./photos` |
+| `convert` | Convert images to specified format | `uv run img-conv convert -e webp` | `img-conv convert -e webp` |
+| `delete` | Remove images by extension | `uv run img-conv delete -r png -y` | `img-conv delete -r png -y` |
 
 ## Support
 

@@ -33,7 +33,7 @@ pip install uv
 
 ```bash
 # If using git
-git clone <repository-url>
+git clone git@github.com:danielmacuare/img-conv.git
 cd img-conv
 
 # Or download and extract the ZIP file
@@ -56,29 +56,6 @@ uv sync
 - `uv python install 3.11`: Downloads and installs Python 3.11 if not already available
 - `uv sync`: Creates a virtual environment (`.venv/`) and installs all dependencies from `pyproject.toml` in one fast operation
 
-### 4. Alternative: Manual Virtual Environment
-
-If you prefer explicit control over the virtual environment:
-
-```bash
-# Create virtual environment with specific Python version
-uv venv --python 3.11
-
-# Activate virtual environment
-# On macOS/Linux:
-source .venv/bin/activate
-
-# On Windows:
-.venv\Scripts\activate
-
-# Install dependencies
-uv pip install -r requirements.txt
-```
-
-**What this does:**
-- `uv venv --python 3.11`: Creates a virtual environment using Python 3.11 (much faster than `python -m venv`)
-- `uv pip install -r requirements.txt`: Installs dependencies using uv's faster resolver (10-100x faster than pip)
-
 This installs:
 
 - `typer[all]` - CLI framework with all features
@@ -96,11 +73,72 @@ uv run img-conv --help
 
 You should see the help menu with available commands.
 
+## Global Installation (Optional)
+
+### What is Global Installation?
+
+Global installation makes the `img-conv` command available system-wide, allowing you to run it from any directory without needing to activate a virtual environment or use `uv run`.
+
+**Benefits:**
+- Run `img-conv` from anywhere on your system
+- No need to remember the project path
+- Integrates with system PATH
+- Works like other CLI tools (git, docker, etc.)
+
+**Considerations:**
+- Installs to your user directory (not system-wide)
+- May conflict with other versions if installed multiple ways
+- Updates require reinstalling globally
+
+### Global Installation Steps
+
+```bash
+# Navigate to the project directory
+cd /path/to/img-conv
+
+# Install globally using uv tool
+uv tool install .
+```
+
+**What this does:**
+- Installs `img-conv` to your user's tool directory (usually `~/.local/bin/`)
+- Adds the command to your PATH automatically
+- Creates an isolated environment for the tool
+
+### Verify Global Installation
+
+```bash
+# Test from any directory
+img-conv --help
+
+# Check installation location
+uv tool list
+```
+
+### Update Global Installation
+
+When you make changes to the code:
+
+```bash
+# Reinstall with latest changes
+uv tool install --force .
+
+# Or uninstall and reinstall
+uv tool uninstall img-conv
+uv tool install .
+```
+
+### Uninstall Global Installation
+
+```bash
+# Remove global installation
+uv tool uninstall img-conv
+```
+
 ## Alternative Installation Methods
 
 ### Using uv directly
 
-If you prefer not to use requirements.txt:
 
 ```bash
 uv pip install "typer[all]"
@@ -121,15 +159,33 @@ uv pip install "typer[all]" mypy black flake8
 - `black`: Code formatter for consistent styling
 - `flake8`: Linting tool for code quality checks
 
-### Global Installation with uvx
+### Direct Installation from Repository
 
-For system-wide access without virtual environments:
+Install directly from a Git repository:
 
 ```bash
-uvx install typer
+# Install from GitHub (when published)
+uv tool install git+https://github.com/username/img-conv.git
+
+# Install from local path
+uv tool install /path/to/img-conv
 ```
 
-**What this does:** Installs the tool globally using `uvx` (uv's equivalent to `pipx`), making it available system-wide without affecting other projects.
+**What this does:** Installs directly from source without needing to clone the repository first.
+
+## Installation Comparison
+
+| Method | Use Case | Command | Global Access | Auto-Updates |
+|--------|----------|---------|---------------|--------------|
+| **Local Development** | Contributing, modifying code | `uv run img-conv` | ❌ | ✅ (automatic) |
+| **Global Installation** | Daily use, system integration | `img-conv` | ✅ | ❌ (manual) |
+| **Virtual Environment** | Isolated project use | `source .venv/bin/activate && img-conv` | ❌ | ❌ (manual) |
+
+### Recommended Approach
+
+- **Developers/Contributors**: Use local development (`uv run img-conv`)
+- **End Users**: Use global installation (`uv tool install`)
+- **CI/CD**: Use virtual environment or uv run
 
 ## Troubleshooting
 
@@ -150,11 +206,29 @@ uvx install typer
 
 - Make sure your virtual environment is activated
 - Reinstall dependencies: `uv sync` or `uv pip install -r requirements.txt`
+- For global installation: `uv tool install --force .`
 
 #### Virtual environment issues
 
 - Delete `.venv` folder and recreate: `rm -rf .venv && uv venv`
 - Or use: `uv sync --reinstall` to rebuild everything
+
+#### Global installation issues
+
+**"Command not found: img-conv"**
+- Check if uv tools directory is in PATH: `echo $PATH | grep .local/bin`
+- Verify installation: `uv tool list`
+- Reinstall: `uv tool install --force .`
+
+**"Permission denied"**
+- Don't use `sudo` with uv tool install
+- Check directory permissions: `ls -la ~/.local/bin/`
+- Try: `uv tool install --python $(which python3) .`
+
+**Multiple versions conflict**
+- Uninstall all versions: `uv tool uninstall img-conv`
+- Remove from pip if installed: `pip uninstall img-conv`
+- Reinstall cleanly: `uv tool install .`
 
 ### Platform-Specific Notes
 
