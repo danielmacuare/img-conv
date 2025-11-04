@@ -139,7 +139,6 @@ uv tool uninstall img-conv
 
 ### Using uv directly
 
-
 ```bash
 uv pip install "typer[all]"
 ```

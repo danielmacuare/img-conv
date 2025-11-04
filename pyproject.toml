@@ -39,6 +39,8 @@ dev = [
     "black>=23.0.0",
     "flake8>=6.0.0",
     "pytest>=7.0.0",
+    "pre-commit>=4.3.0",
+    "pymarkdownlnt>=0.9.33",
 ]
 
 [project.urls]
@@ -76,3 +78,8 @@ extend-exclude = '''
   | dist
 )/
 '''
+
+[tool.pymarkdown]
+plugins.md041.enabled = false
+# Excluding rules
+# https://github.com/jackdewinter/pymarkdown/issues/1462

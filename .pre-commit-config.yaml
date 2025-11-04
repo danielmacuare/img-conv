@@ -1,0 +1,7 @@
+default_stages: [pre-commit, pre-push]
+
+repos:
+    - repo: https://github.com/jackdewinter/pymarkdown
+      rev: v0.9.33
+      hooks:
+          - id: pymarkdown

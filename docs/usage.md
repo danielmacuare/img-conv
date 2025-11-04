@@ -22,6 +22,7 @@ uv run img-conv show [OPTIONS]
 - `-s, --source-dir TEXT`: Directory to scan for images (default: current directory)
 
 **Examples:**
+
 ```bash
 # Show images in current directory
 uv run img-conv show
@@ -52,6 +53,7 @@ uv run img-conv convert [OPTIONS]
 - `-e, --output-extension TEXT`: Output format - WEBP, PNG, JPG (default: WEBP)
 
 **Examples:**
+
 ```bash
 # Convert all images to WEBP in current directory
 uv run img-conv convert
@@ -87,6 +89,7 @@ uv run img-conv delete [OPTIONS]
 - `-y, --auto-confirm`: Skip confirmation prompt (default: dry-run mode)
 
 **Examples:**
+
 ```bash
 # Dry run - show what would be deleted (default behavior)
 uv run img-conv delete
