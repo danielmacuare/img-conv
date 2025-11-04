@@ -3,6 +3,7 @@
 A powerful command-line tool for batch image processing that converts images (JPG, JPEG, PNG, WEBP) to webp with optimization and detailed reporting.
 
 ## TO-DO
+
 - Semantic Versioning
 - Dev Branch
 - Automatic Validation of markdown files.  

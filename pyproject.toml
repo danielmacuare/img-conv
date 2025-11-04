@@ -80,6 +80,8 @@ extend-exclude = '''
 '''
 
 [tool.pymarkdown]
-plugins.md041.enabled = false
 # Excluding rules
-# https://github.com/jackdewinter/pymarkdown/issues/1462
+# https://pymarkdown.readthedocs.io/en/latest/rules/
+plugins.md041.enabled = false #First line in file should be a top-level heading.
+plugins.md013.enabled = false #First line in file should be a top-level heading.
+# Exclude dirs (Not yet possible from this file) https://github.com/jackdewinter/pymarkdown/issues/1462

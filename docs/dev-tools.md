@@ -1,6 +1,8 @@
 
-## pymarkdownlnt
-- Link: https://pymarkdown.readthedocs.io/en/latest/
+pymarkdownlnt
+=============
+
+- Link: <https://pymarkdown.readthedocs.io/en/latest/>
 
 ```bash
 # Scan recursively from the root of the repo
@@ -13,7 +15,8 @@ uv run pymarkdown fix README.md
 
 ```
 
-## Pre-commit
+Pre-commit
+==========
 
 ```bash
 uv run pre-commit install

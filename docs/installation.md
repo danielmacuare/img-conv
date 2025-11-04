@@ -214,17 +214,23 @@ uv tool install /path/to/img-conv
 
 #### Global installation issues
 
-**"Command not found: img-conv"**
+"Command not found: img-conv"
+--------------------------------
+
 - Check if uv tools directory is in PATH: `echo $PATH | grep .local/bin`
 - Verify installation: `uv tool list`
 - Reinstall: `uv tool install --force .`
 
-**"Permission denied"**
+"Permission denied"
+-------------------
+
 - Don't use `sudo` with uv tool install
 - Check directory permissions: `ls -la ~/.local/bin/`
 - Try: `uv tool install --python $(which python3) .`
 
-**Multiple versions conflict**
+"Multiple versions conflict"
+----------------------------
+
 - Uninstall all versions: `uv tool uninstall img-conv`
 - Remove from pip if installed: `pip uninstall img-conv`
 - Reinstall cleanly: `uv tool install .`
