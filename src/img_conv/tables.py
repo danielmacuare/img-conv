@@ -9,7 +9,7 @@ from rich.table import Table
 
 console: Console = Console()
 
-from constants import (
+from .constants import (
     ERROR_EMOT,
     GREEN,
     INFO_EMOT,
