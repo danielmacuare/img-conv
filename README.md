@@ -24,32 +24,31 @@ A powerful command-line tool for batch image processing that converts images (JP
 
 ## Quick Start
 
-### Requirements
-
-- Python 3.11 or higher
-- pip package manager
-
-### Installation
-
-See detailed installation instructions: [docs/installation.md](docs/installation.md)
+### 🚀 Try it instantly (no installation required)
 
 ```bash
-# Clone and setup
-git clone git@github.com:danielmacuare/img-conv.git
-cd img-conv
-
-# Install uv (if not already installed)
+# Install uv if you don't have it
 curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 # or: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
 
-# Option 1: Local development (recommended for contributors)
+# Run directly from GitHub (no local installation)
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv list
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert --help
+```
+
+### 📦 Full Installation
+
+For regular use, see detailed installation instructions: [docs/installation.md](docs/installation.md)
+
+```bash
+# Option 1: Global installation (recommended for end users)
+uv tool install git+https://github.com/danielmacuare/img-conv
+
+# Option 2: Development setup (for contributors)
+git clone git@github.com:danielmacuare/img-conv.git
+cd img-conv
 uv sync
-
-# Option 2: Global installation (recommended for end users)
-uv tool install .
-
-# For option 2: After making changes to the application, you will need to reinstall the APP
-uv tool install --force .
 ```
 
 ### Basic Usage

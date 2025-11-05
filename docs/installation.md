@@ -2,6 +2,27 @@
 
 This guide will walk you through setting up the img-conv tool on your system.
 
+## 🚀 Quick Test (No Installation Required)
+
+Try img-conv instantly without any local installation:
+
+```bash
+# Install uv if you don't have it
+curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
+# or: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
+
+# Test the tool directly from GitHub
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv list --help
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert --help
+```
+
+**What this does:**
+- Downloads and runs img-conv directly from GitHub
+- No local installation or cloning required
+- Perfect for testing before committing to installation
+- Uses the latest version from the main branch
+
 ## System Requirements
 
 - **Python**: Version 3.11 or higher (uv can install this for you if needed)
@@ -29,7 +50,24 @@ pip install uv
 
 **What this does:** Downloads and installs `uv`, which is significantly faster than `pip` and can manage Python versions automatically. It also handles virtual environments more efficiently.
 
-### 2. Clone or Download the Project
+### 2. Install Directly from GitHub (Recommended)
+
+Install the latest version directly from the repository:
+
+```bash
+# Install globally from GitHub
+uv tool install git+https://github.com/danielmacuare/img-conv
+```
+
+**What this does:**
+- Installs the latest version from GitHub
+- No need to clone the repository
+- Automatically handles all dependencies
+- Makes `img-conv` available system-wide
+
+### 3. Clone for Development (Alternative)
+
+Only needed if you want to contribute or modify the code:
 
 ```bash
 # If using git
@@ -39,7 +77,7 @@ cd img-conv
 # Or download and extract the ZIP file
 ```
 
-### 3. Set Up Project with uv
+### 4. Set Up Project with uv (Development Only)
 
 Use `uv` to automatically create a virtual environment and install dependencies:
 
@@ -67,7 +105,10 @@ This installs:
 Test the installation by running:
 
 ```bash
-# Using the installed CLI command
+# If you installed globally from GitHub (step 2)
+img-conv --help
+
+# If you're doing development setup (step 4)
 uv run img-conv --help
 ```
 
@@ -98,6 +139,9 @@ cd /path/to/img-conv
 
 # Install globally using uv tool
 uv tool install .
+
+# Reinstall the App after making a change
+uv tool install --force .
 ```
 
 **What this does:**
@@ -176,15 +220,17 @@ uv tool install /path/to/img-conv
 
 | Method | Use Case | Command | Global Access | Auto-Updates |
 |--------|----------|---------|---------------|--------------|
-| **Local Development** | Contributing, modifying code | `uv run img-conv` | ❌ | ✅ (automatic) |
+| **Quick Test** | Try before installing | `uvx --from git+... img-conv` | ❌ | ✅ (always latest) |
 | **Global Installation** | Daily use, system integration | `img-conv` | ✅ | ❌ (manual) |
+| **Local Development** | Contributing, modifying code | `uv run img-conv` | ❌ | ✅ (automatic) |
 | **Virtual Environment** | Isolated project use | `source .venv/bin/activate && img-conv` | ❌ | ❌ (manual) |
 
 ### Recommended Approach
 
+- **First-time users**: Try with `uvx --from git+https://github.com/danielmacuare/img-conv img-conv`
+- **Regular users**: Use global installation (`uv tool install git+https://github.com/danielmacuare/img-conv`)
 - **Developers/Contributors**: Use local development (`uv run img-conv`)
-- **End Users**: Use global installation (`uv tool install`)
-- **CI/CD**: Use virtual environment or uv run
+- **CI/CD**: Use uvx or virtual environment
 
 ## Troubleshooting
 
