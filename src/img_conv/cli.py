@@ -12,7 +12,7 @@ from .helpers import (
 )
 
 
-app = Typer()
+app = Typer(no_args_is_help=True)
 
 
 @app.command("show")
