@@ -1,6 +1,6 @@
 # img-conv
 
-A powerful command-line tool for batch image processing that converts images (JPG, JPEG, PNG, WEBP) to webp with optimization and detailed reporting.
+A powerful command-line tool for batch image processing that converts images (JPG, JPEG, PNG, WEBP, AVIF) to AVIF with optimization and detailed reporting.
 
 ## TO-DO
 
@@ -15,7 +15,7 @@ A powerful command-line tool for batch image processing that converts images (JP
 ## Features
 
 - 🖼️ **Batch Processing**: Convert multiple images in directories and subdirectories
-- 📊 **Format Support**: JPEG, PNG, WEBP conversion with quality optimization
+- 📊 **Format Support**: JPEG, PNG, WEBP, AVIF conversion with quality optimization
 - 📈 **Size Optimization**: Automatic compression with detailed savings reports
 - 🔍 **Image Analysis**: Display image information (size, path, format)
 - 🗑️ **Safe Deletion**: Remove images by format with dry-run mode

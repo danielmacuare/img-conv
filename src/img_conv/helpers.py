@@ -95,7 +95,7 @@ def process_images(input_folders: List[Path]):
 
 
 def file_is_image(possible_image: Path) -> bool:
-    image_extensions = [".jpeg", ".jpg", ".png", ".webp"]
+    image_extensions = [".jpeg", ".jpg", ".png", ".webp", ".avif"]
     return possible_image.suffix.lower() in image_extensions
 
 
@@ -192,7 +192,7 @@ def convert_images(
             # Only the name, I need to add th starting path
             source_image_path = image_props["path"]
             image = Image.open(source_image_path)
-            if image.format in ["JPEG", "jpeg", "PNG", "png"]:
+            if image.format in ["JPEG", "jpeg", "PNG", "png", "WEBP", "webp"]:
                 output_filename = (
                     source_image_path.stem + f".{output_extension.lower()}"
                 )
@@ -210,7 +210,14 @@ def convert_images(
                         source_image_path.parent, output_filename
                     )
 
-                image.save(output_file_path, output_extension.capitalize(), quality=80)
+                # Set quality based on format - AVIF uses different quality scale
+                if output_extension.upper() == "AVIF":
+                    # AVIF quality 63 provides similar visual quality to WEBP 80
+                    image.save(output_file_path, output_extension.upper(), quality=63)
+                elif output_extension.upper() == "WEBP":
+                    image.save(output_file_path, output_extension.upper(), quality=80)
+                else:
+                    image.save(output_file_path, output_extension.capitalize(), quality=80)
                 console.print(
                     f"{SUCCESS_EMOT} Image saved at: {output_file_path.resolve()}"
                 )
@@ -284,7 +291,7 @@ def delete_images(
     """
     img_formats: List[str] = []
     if remove_extension == "*":
-        img_formats = ["jpg", "jpeg", "png"]
+        img_formats = ["jpg", "jpeg", "png", "webp"]
     else:
         img_formats.append(remove_extension)
     for image in images_info:

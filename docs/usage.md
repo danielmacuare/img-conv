@@ -65,7 +65,7 @@ uv run img-conv list ~/Pictures
 - Table showing image paths, names, and file sizes
 - For directories: scans subdirectories automatically
 - For files: shows information about that specific image
-- Supports JPEG, PNG, and WEBP formats
+- Supports JPEG, PNG, WEBP, and AVIF formats
 
 ### Convert Command
 
@@ -80,7 +80,7 @@ uv run img-conv convert [TARGET] [OPTIONS]
 
 **Options:**
 - `-d, --destination-dir TEXT`: Output directory (default: see "Default Behavior" below)
-- `-e, --output-extension TEXT`: Output format - WEBP, PNG, JPG (default: WEBP)
+- `-e, --output-extension TEXT`: Output format - AVIF, WEBP, PNG, JPG (default: AVIF)
 
 **Examples:**
 
@@ -96,6 +96,9 @@ uv run img-conv convert samples/Image1.jpg
 
 # Convert to PNG format
 uv run img-conv convert samples --output-extension png
+
+# Convert to WEBP format (previous default)
+uv run img-conv convert samples --output-extension webp
 
 # Convert single file to PNG
 uv run img-conv convert samples/Image1.jpg --output-extension png
@@ -119,7 +122,7 @@ uv run img-conv convert /home/user/vacation-photos/
 ```
 
 **Features:**
-- Automatic quality optimization (80% for WEBP)
+- Automatic quality optimization (63% for AVIF, 80% for WEBP - optimized for best compression)
 - Preserves original files
 - Shows conversion statistics and file size savings
 - Creates output directories automatically
@@ -178,7 +181,7 @@ uv run img-conv delete samples --auto-confirm
 - Dry-run mode by default (shows what would be deleted)
 - Confirmation required for actual deletion
 - Only processes supported image formats
-- Preserves WEBP files when using default "*" option
+- Preserves AVIF files when using default "*" option
 - Works with both single files and entire directories
 
 ## Workflow Examples
@@ -189,7 +192,7 @@ uv run img-conv delete samples --auto-confirm
 # 1. Check what images you have (try with samples first!)
 uv run img-conv list samples
 
-# 2. Convert to WEBP for optimization
+# 2. Convert to AVIF for optimization (new default)
 uv run img-conv convert samples
 
 # 3. Review the results and savings
@@ -313,6 +316,7 @@ uv run img-conv convert /home/user/photos/ --destination-dir ./converted/
 
 ### Quality Settings
 
+- AVIF at 63% quality provides excellent compression with high visual quality (new default - AVIF quality scale differs from WEBP)
 - WEBP at 80% quality provides good balance of size and quality
 - For archival purposes, consider PNG for lossless compression
 - JPEG is good for photographs where some quality loss is acceptable

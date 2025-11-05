@@ -13,9 +13,18 @@ curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 
 # Test the tool directly from GitHub
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
+
+
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv list samples
+
+
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert samples --help
 ```
+
+![List Images](docs/media/list-images.gif)
+
+
+![List Images](docs/media/conv-image.gif)
 
 **What this does:**
 

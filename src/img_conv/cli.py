@@ -36,10 +36,10 @@ def convert(
         help="Directory path where to store the converted images (default: same directory as source file, or in-place for directories)",
     ),
     output_extension: str = Option(
-        "WEBP",
+        "AVIF",
         "--output-extension",
         "-e",
-        help="Output extension of the files to be converted (WEBP, PNG, JPG)",
+        help="Output extension of the files to be converted (AVIF, WEBP, PNG, JPG)",
     ),
     mode: str = Option("convert", hidden=True),
 ):
@@ -71,7 +71,7 @@ def delete(
         "*",
         "--remove-extension",
         "-r",
-        help="Extension of the files to be removed (WEBP, PNG, JPG). Default * removes all except webp images",
+        help="Extension of the files to be removed (AVIF, WEBP, PNG, JPG). Default * removes all except AVIF images",
     ),
     auto_confirm: bool = Option(
         False,
