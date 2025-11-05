@@ -9,7 +9,7 @@ description = "A powerful command-line tool for batch image processing and forma
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
-    {name = "Daniel Macuare", email = "daniel.macuare@example.com"},
+    {name = "Daniel Macuare", email = "danielmacuare.uk@gmail.com"},
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
