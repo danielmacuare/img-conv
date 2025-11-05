@@ -35,8 +35,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 
 # Run directly from GitHub (no local installation)
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
-uvx --from git+https://github.com/danielmacuare/img-conv img-conv list --source-dir samples
-uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert --source-dir samples 
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv list samples
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert samples 
 ```
 
 ### 📦 Full Installation
@@ -57,14 +57,18 @@ uv sync
 
 ```bash
 # Local development (after uv sync)
-uv run img-conv list --source-dir samples
-uv run img-conv convert --source-dir samples --output-extension webp
-uv run img-conv delete --source-dir samples
+uv run img-conv list samples
+uv run img-conv convert samples
+uv run img-conv delete samples
 
 # Global installation (after uv tool install .)
-img-conv list --source-dir samples
-img-conv convert --source-dir samples --output-extension webp
-img-conv delete --source-dir samples
+img-conv list samples
+img-conv convert samples
+img-conv delete samples
+
+# Single file processing
+uv run img-conv convert photo.jpg
+uv run img-conv list image.png
 ```
 
 ## Documentation
@@ -79,9 +83,17 @@ img-conv delete --source-dir samples
 
 | Command | Description | Local Development | Global Installation |
 |---------|-------------|-------------------|-------------------|
-| `list` | Display image information | `uv run img-conv list -s samples` | `img-conv list -s samples` |
-| `convert` | Convert images to specified format | `uv run img-conv convert -s samples -e webp` | `img-conv convert -s samples -e webp` |
-| `delete` | Remove images by extension | `uv run img-conv delete -s samples -r jpg -y` | `img-conv delete -s samples -r jpg -y` |
+| `list` | Display image information | `uv run img-conv list samples` | `img-conv list samples` |
+| `convert` | Convert images to specified format | `uv run img-conv convert samples` | `img-conv convert samples` |
+| `delete` | Remove images by extension | `uv run img-conv delete samples --auto-confirm` | `img-conv delete samples --auto-confirm` |
+
+### Single File Examples
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `list` | Analyze single image | `uv run img-conv list photo.jpg` |
+| `convert` | Convert single image | `uv run img-conv convert photo.jpg` |
+| `delete` | Delete single image | `uv run img-conv delete photo.jpg --auto-confirm` |
 
 ## Support
 

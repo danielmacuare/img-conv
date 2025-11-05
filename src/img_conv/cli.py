@@ -33,7 +33,7 @@ def convert(
         None,
         "--destination-dir",
         "-d",
-        help="Directory path where to store the converted images",
+        help="Directory path where to store the converted images (default: same directory as source file, or in-place for directories)",
     ),
     output_extension: str = Option(
         "WEBP",
