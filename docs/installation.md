@@ -2,29 +2,39 @@
 
 This guide will walk you through setting up the img-conv tool on your system.
 
+
+## Pre-requisites
+
+### Install uv if you don't have it
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
+# or: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
+```
+
 ## 🚀 Quick Test (No Installation Required)
 
 Try img-conv instantly without any local installation:
 
+
+### Listing files
+
+![List Images](https://github.com/danielmacuare/img-conv/blob/main/docs/media/list.gif)
+
 ```bash
-# Install uv if you don't have it
-curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
-# or: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"  # Windows
-
-# Test the tool directly from GitHub
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
-
-
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv list samples
-
-
-uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert samples --help
 ```
 
-![List Images](docs/media/list-images.gif)
 
+### Converting Files (to AVIF Format by default)
 
-![List Images](docs/media/conv-image.gif)
+![Convert Images](https://github.com/danielmacuare/img-conv/blob/main/docs/media/conv-image.gif)
+
+```bash
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert samples/Image1.jpg # Convert one image to AVIF
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert samples # Convert all images in the samples folder to AVIF
+```
 
 **What this does:**
 
