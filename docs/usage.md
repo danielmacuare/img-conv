@@ -2,6 +2,20 @@
 
 Complete guide to using the img-conv tool for all your image processing needs.
 
+## Sample Images
+
+This repository includes sample JPEG images in the `samples/` directory that you can use to test all commands:
+
+```bash
+# See what sample images are available
+uv run img-conv list --source-dir samples
+
+# Try converting them
+uv run img-conv convert --source-dir samples --output-extension webp
+```
+
+The sample images are perfect for learning how the tool works before using it on your own images.
+
 ## Command Structure
 
 ```bash
@@ -28,6 +42,9 @@ uv run img-conv list [OPTIONS]
 ```bash
 # List images in current directory
 uv run img-conv list
+
+# List sample images (try this first!)
+uv run img-conv list --source-dir samples
 
 # List images in specific directory
 uv run img-conv list --source-dir ./photos
@@ -61,11 +78,14 @@ uv run img-conv convert [OPTIONS]
 # Convert all images to WEBP in current directory
 uv run img-conv convert
 
+# Convert sample images (try this first!)
+uv run img-conv convert --source-dir samples --output-extension webp
+
 # Convert with specific source and destination
 uv run img-conv convert -s ./input -d ./output -e webp
 
 # Convert to PNG format
-uv run img-conv convert --output-extension png
+uv run img-conv convert --source-dir samples --output-extension png
 
 # Convert in-place (same directory)
 uv run img-conv convert --source-dir ./photos
@@ -98,14 +118,14 @@ uv run img-conv delete [OPTIONS]
 # Dry run - show what would be deleted (default behavior)
 uv run img-conv delete
 
-# Delete all non-WEBP images (dry run)
-uv run img-conv delete --source-dir ./photos
+# Delete all non-WEBP images from samples (dry run)
+uv run img-conv delete --source-dir samples
 
-# Delete only PNG files with confirmation
-uv run img-conv delete -r png -y
+# Delete only JPG files from samples with confirmation
+uv run img-conv delete --source-dir samples -r jpg -y
 
 # Delete all non-WEBP images with confirmation
-uv run img-conv delete --auto-confirm
+uv run img-conv delete --source-dir samples --auto-confirm
 ```
 
 **Safety Features:**
@@ -120,19 +140,19 @@ Basic Image Optimization Workflow
 ----------------------------------
 
 ```bash
-# 1. Check what images you have
-uv run img-conv list -s ./photos
+# 1. Check what images you have (try with samples first!)
+uv run img-conv list -s samples
 
 # 2. Convert to WEBP for optimization
-uv run img-conv convert -s ./photos -e webp
+uv run img-conv convert -s samples -e webp
 
 # 3. Review the results and savings
 
 # 4. Clean up original files (dry run first)
-uv run img-conv delete -s ./photos
+uv run img-conv delete -s samples
 
 # 5. Confirm deletion if satisfied
-uv run img-conv delete -s ./photos -y
+uv run img-conv delete -s samples -y
 ```
 
 Batch Processing Multiple Directories
@@ -150,14 +170,14 @@ Format-Specific Operations
 --------------------------
 
 ```bash
-# Convert only to PNG (lossless)
-uv run img-conv convert -e png
+# Convert sample images to PNG (lossless)
+uv run img-conv convert -s samples -e png
 
-# Remove only JPEG files
-uv run img-conv delete -r jpg -y
+# Remove only JPEG files from samples
+uv run img-conv delete -s samples -r jpg -y
 
-# Remove only PNG files
-uv run img-conv delete -r png -y
+# Remove only PNG files from samples
+uv run img-conv delete -s samples -r png -y
 ```
 
 Understanding Output

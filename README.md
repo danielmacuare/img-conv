@@ -22,6 +22,8 @@ A powerful command-line tool for batch image processing that converts images (JP
 - 🎨 **Rich Output**: Beautiful terminal tables and progress indicators
 - 📁 **Directory Management**: Automatic output directory creation
 
+> 💡 **Tip**: This repository includes sample JPEG images in the `samples/` directory - perfect for testing all commands!
+
 ## Quick Start
 
 ### 🚀 Try it instantly (no installation required)
@@ -33,8 +35,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
 
 # Run directly from GitHub (no local installation)
 uvx --from git+https://github.com/danielmacuare/img-conv img-conv --help
-uvx --from git+https://github.com/danielmacuare/img-conv img-conv list
-uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert --help
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv list --source-dir samples
+uvx --from git+https://github.com/danielmacuare/img-conv img-conv convert --source-dir samples 
 ```
 
 ### 📦 Full Installation
@@ -55,14 +57,14 @@ uv sync
 
 ```bash
 # Local development (after uv sync)
-uv run img-conv list
-uv run img-conv convert --source-dir ./images --output-extension webp
-uv run img-conv delete --source-dir ./images
+uv run img-conv list --source-dir samples
+uv run img-conv convert --source-dir samples --output-extension webp
+uv run img-conv delete --source-dir samples
 
 # Global installation (after uv tool install .)
-img-conv list
-img-conv convert --source-dir ./images --output-extension webp
-img-conv delete --source-dir ./images
+img-conv list --source-dir samples
+img-conv convert --source-dir samples --output-extension webp
+img-conv delete --source-dir samples
 ```
 
 ## Documentation
@@ -77,9 +79,9 @@ img-conv delete --source-dir ./images
 
 | Command | Description | Local Development | Global Installation |
 |---------|-------------|-------------------|-------------------|
-| `list` | Display image information | `uv run img-conv list -s ./photos` | `img-conv list -s ./photos` |
-| `convert` | Convert images to specified format | `uv run img-conv convert -e webp` | `img-conv convert -e webp` |
-| `delete` | Remove images by extension | `uv run img-conv delete -r png -y` | `img-conv delete -r png -y` |
+| `list` | Display image information | `uv run img-conv list -s samples` | `img-conv list -s samples` |
+| `convert` | Convert images to specified format | `uv run img-conv convert -s samples -e webp` | `img-conv convert -s samples -e webp` |
+| `delete` | Remove images by extension | `uv run img-conv delete -s samples -r jpg -y` | `img-conv delete -s samples -r jpg -y` |
 
 ## Support
 
