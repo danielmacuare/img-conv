@@ -6,8 +6,8 @@ with optimization and detailed reporting.
 """
 
 __version__ = "0.1.0"
-__author__ = "Your Name"
-__email__ = "your.email@example.com"
+__author__ = "Daniel Macuare"
+__email__ = "danielmacuare.uk@gmail.com"
 
 from .cli import app
 

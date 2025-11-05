@@ -46,6 +46,9 @@ uv sync
 
 # Option 2: Global installation (recommended for end users)
 uv tool install .
+
+# For option 2: After making changes to the application, you will need to reinstall the APP
+uv tool install --force .
 ```
 
 ### Basic Usage
