@@ -83,5 +83,7 @@ extend-exclude = '''
 # Excluding rules
 # https://pymarkdown.readthedocs.io/en/latest/rules/
 plugins.md041.enabled = false #First line in file should be a top-level heading.
-plugins.md013.enabled = false #First line in file should be a top-level heading.
+plugins.md013.enabled = false #Line length limit.
+plugins.md003.style = "atx" #Use ATX-style headings consistently.
+extensions.front-matter.enabled = true #Enable front-matter support.
 # Exclude dirs (Not yet possible from this file) https://github.com/jackdewinter/pymarkdown/issues/1462
