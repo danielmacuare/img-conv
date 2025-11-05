@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-from typer import Option, Typer
+from pathlib import Path
+from typer import Argument, Option, Typer
+from typing import Optional
 
 from .helpers import (
     convert_images,
@@ -17,21 +19,17 @@ app = Typer(no_args_is_help=True)
 
 @app.command("list")
 def list_images(
-    source_dir: str = Option(
-        ".", "--source-dir", "-s", help="Directory path to look for images"
-    ),
+    target: str = Argument(".", help="File or directory to analyze"),
     mode: str = Option("show", hidden=True),
 ):
-    images_info = get_images_info(source_dir)
+    images_info = get_images_info(target)
     show_results(images_info, mode)
 
 
 @app.command("convert")
 def convert(
-    source_dir: str = Option(
-        ".", "--source-dir", "-s", help="Directory path to look for images"
-    ),
-    destination_dir: str = Option(
+    target: str = Argument(".", help="File or directory to convert"),
+    destination_dir: Optional[str] = Option(
         None,
         "--destination-dir",
         "-d",
@@ -45,14 +43,20 @@ def convert(
     ),
     mode: str = Option("convert", hidden=True),
 ):
+    # If no destination specified, determine based on target type
     if not destination_dir:
-        destination_dir = source_dir
+        target_path = Path(target)
+        if target_path.is_file():
+            destination_dir = str(target_path.parent)
+        else:
+            destination_dir = target
+    
     print("Convert Images")
     validate_dir(destination_dir)
-    images_info = get_images_info(source_dir)
+    images_info = get_images_info(target)
     converted_images = convert_images(
         images_info,
-        source_dir,
+        target,
         destination_dir,
         output_extension,
     )
@@ -62,10 +66,7 @@ def convert(
 
 @app.command("delete")
 def delete(
-    source_dir: str = Option(
-        ".", "--source-dir", "-s", help="Directory path to look for images"
-    ),
-    mode: str = Option("delete", hidden=True),
+    target: str = Argument(".", help="File or directory to process"),
     remove_extension: str = Option(
         "*",
         "--remove-extension",
@@ -79,8 +80,8 @@ def delete(
         help="Set this option to auto-confirm the removal of all images [Default: Dry-Run]",
     ),
 ):
-    images_info = get_images_info(source_dir)
-    delete_images(images_info, source_dir, remove_extension.lower(), auto_confirm)
+    images_info = get_images_info(target)
+    delete_images(images_info, target, remove_extension.lower(), auto_confirm)
 
 
 def main():

@@ -2,14 +2,12 @@
 
 from pathlib import Path
 from sys import exit
-from typing import Dict, List, Optional
+from typing import List
 
 from PIL import Image
-from rich import inspect
 from rich import print as rprint
 from rich.console import Console
 from rich.table import Table
-from typer import Exit
 
 from .constants import (
     DRY_RUN_EMOT,
@@ -25,38 +23,56 @@ from .constants import (
 console: Console = Console()
 
 
-def get_images_info(source_dir: str) -> List[dict]:
+def get_images_info(target: str) -> List[dict]:
     """Get Initial Images Info Like name, path, original_size,
 
     Args:
-        source_dir (Path): Directory path where images will be read from
+        target (str): File or directory path where images will be read from
 
     Returns:
         List[dict]: Each dictionary represents an image. Keys: name, path, original_size
     """
 
     try:
-        source_dir_path = Path(source_dir).expanduser().resolve()
-        # source_dir_full_path = source_dir.expanduser().resolve()
-        rprint(f"{INFO_EMOT} Looking for images at: {source_dir_path}")
-        # Getting a list of folders to search
-        input_folders = [
-            element for element in source_dir_path.iterdir() if element.is_dir()
-        ]
-
-        input_folders.append(source_dir_path)
-
-        images_info = process_images(input_folders)
-
-        if images_info:
-            return images_info
+        target_path = Path(target).expanduser().resolve()
+        rprint(f"{INFO_EMOT} Looking for images at: {target_path}")
+        
+        # Check if target is a file or directory
+        if target_path.is_file():
+            # Single file processing
+            if file_is_image(target_path):
+                images_info = [{
+                    "name": target_path.name,
+                    "path": target_path,
+                    "original_size_kb": target_path.stat().st_size / 1024,
+                }]
+                return images_info
+            else:
+                rprint(f"{ERROR_EMOT} File '{target_path}' is not a supported image format")
+                exit(4)
+        
+        elif target_path.is_dir():
+            # Directory processing (recursive)
+            input_folders = [
+                element for element in target_path.iterdir() if element.is_dir()
+            ]
+            input_folders.append(target_path)
+            
+            images_info = process_images(input_folders)
+            
+            if images_info:
+                return images_info
+            else:
+                rprint(f"{ERROR_EMOT} No images were found at: {target_path}")
+                exit(4)
+        
         else:
-            rprint(f"{ERROR_EMOT}3 No images were found at: {source_dir_path}")
-            exit(4)
+            rprint(f"{ERROR_EMOT} Path '{target_path}' does not exist")
+            exit(1)
 
     except FileNotFoundError:
         console.print(
-            f'{ERROR_EMOT}1 The folder "{source_dir_path}" from which the files will be read from, doesn\'t exists.'
+            f'{ERROR_EMOT} The path "{target_path}" does not exist.'
         )
         exit(1)
 
@@ -150,7 +166,7 @@ def validate_dir(destination_dir: str):
 
 def convert_images(
     images_info_dict: List[dict],
-    source_dir: str,
+    target: str,
     destination_dir: str,
     output_extension: str = "WEBP",
 ) -> List[dict]:
@@ -183,7 +199,7 @@ def convert_images(
 
                 # Define where the Image is going to get saved
                 # Save output on the destination_dir defined by user
-                if source_dir != destination_dir:
+                if target != destination_dir:
                     output_file_path = Path.joinpath(
                         destination_dir_path, output_filename
                     )
@@ -212,12 +228,12 @@ def convert_images(
                     }
                 )
             else:
-                console.print(f"{SKIPPING_EMOT} Won't convert: {source_dir}")
+                console.print(f"{SKIPPING_EMOT} Won't convert: {source_image_path}")
         except Exception as error:
-            console.print(f"{ERROR_EMOT} []Error processing {source_dir}: {str(error)}")
+            console.print(f"{ERROR_EMOT} Error processing {source_image_path}: {str(error)}")
             exit(2)
     if not converted_images:
-        rprint(f"{WARNING_EMOT}3 No images were found at: {source_dir}")
+        rprint(f"{WARNING_EMOT} No images were converted from: {target}")
         exit(3)
 
     return converted_images
@@ -251,7 +267,7 @@ def show_savings(images_info: List[dict]):
 
 def delete_images(
     images_info: List[dict],
-    source_dir: str,
+    target: str,
     remove_extension: str,
     auto_confirm: bool = False,
 ):
@@ -261,7 +277,7 @@ def delete_images(
 
     Args:
         images_info (List[dict]): General info associated with each image
-        source_dir (str): Source Directory to get the images to be deleted
+        target (str): File or directory path to process
         remove_extension (str): jpeg, jpg or png
         auto_confirm (bool, optional): Allows to delete the images.
             Defaults to False (Dry-Run).
