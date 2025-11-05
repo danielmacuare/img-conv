@@ -1,6 +1,8 @@
+# Dev Tools
 
-pymarkdownlnt
-=============
+In this file we will keep track of all common commands used for each of the dev tools.
+
+## pymarkdownlnt
 
 - Link: <https://pymarkdown.readthedocs.io/en/latest/>
 
@@ -15,8 +17,7 @@ uv run pymarkdown fix README.md
 
 ```
 
-Pre-commit
-==========
+## Pre-commit
 
 ```bash
 uv run pre-commit install

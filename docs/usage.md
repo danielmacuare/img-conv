@@ -24,8 +24,7 @@ uv run img-conv <command> [options]
 
 ## Commands
 
-1. List Command
----------------
+### List Command
 
 Display information about images in a directory.
 
@@ -54,12 +53,12 @@ uv run img-conv list -s ~/Pictures
 ```
 
 **Output:**
+
 - Table showing image paths, names, and file sizes
 - Scans subdirectories automatically
 - Supports JPEG, PNG, and WEBP formats
 
-2. Convert Command
------------------
+### Convert Command
 
 Convert images between formats with optimization.
 
@@ -98,8 +97,7 @@ uv run img-conv convert --source-dir ./photos
 - Creates output directories automatically
 - Skips files already in target format
 
-3. Delete Command
-----------------
+### Delete Command
 
 Remove images by extension with safety features.
 
@@ -108,6 +106,7 @@ uv run img-conv delete [OPTIONS]
 ```
 
 **Options:**
+
 - `-s, --source-dir TEXT`: Directory to process (default: current directory)
 - `-r, --remove-extension TEXT`: Extension to remove - WEBP, PNG, JPG, or * (default: *)
 - `-y, --auto-confirm`: Skip confirmation prompt (default: dry-run mode)
@@ -136,8 +135,7 @@ uv run img-conv delete --source-dir samples --auto-confirm
 
 ## Workflow Examples
 
-Basic Image Optimization Workflow
-----------------------------------
+### Basic Image Optimization Workflow
 
 ```bash
 # 1. Check what images you have (try with samples first!)
@@ -155,8 +153,7 @@ uv run img-conv delete -s samples
 uv run img-conv delete -s samples -y
 ```
 
-Batch Processing Multiple Directories
--------------------------------------
+### Batch Processing Multiple Directories
 
 ```bash
 # Process each directory separately
@@ -166,8 +163,7 @@ for dir in photo1 photo2 photo3; do
 done
 ```
 
-Format-Specific Operations
---------------------------
+### Format-Specific Operations
 
 ```bash
 # Convert sample images to PNG (lossless)
@@ -180,85 +176,75 @@ uv run img-conv delete -s samples -r jpg -y
 uv run img-conv delete -s samples -r png -y
 ```
 
-Understanding Output
-====================
+## Understanding Output
 
-List Command Output
--------------------
+### List Command Output
 
 - **Path**: Directory containing the image
 - **Name**: Image filename
 - **Size (KB)**: File size in kilobytes
 
-Convert Command Output
-----------------------
+### Convert Command Output
 
 - **Conversion progress**: Success/error messages for each file
 - **Summary table**: Before/after sizes and percentage savings
 - **Total statistics**: Overall space saved across all conversions
 
-Delete Command Output
----------------------
+### Delete Command Output
 
 - **Dry-run mode**: Lists files that would be deleted
 - **Confirmation mode**: Shows files as they're deleted
 - **Error handling**: Reports any files that couldn't be deleted
 
-Tips and Best Practices
-========================
+## Tips and Best Practices
 
-Performance
------------
+### Performance
+
 - Process smaller batches for very large image collections
 - Use SSD storage for faster processing
 - Close other applications when processing many large images
 
-Quality Settings
-----------------
+### Quality Settings
+
 - WEBP at 80% quality provides good balance of size and quality
 - For archival purposes, consider PNG for lossless compression
 - JPEG is good for photographs where some quality loss is acceptable
 
-Safety
-------
+### Safety
+
 - Always run delete commands in dry-run mode first
 - Keep backups of important images
 - Test on a small batch before processing large collections
 
-Directory Organization
-----------------------
+### Directory Organization
+
 - Use separate output directories to keep originals safe
 - Organize by date or project for easier management
 - Consider using descriptive directory names
 
 ## Troubleshooting
 
-Common Issues
--------------
+### Common Issues
 
-"No images found"
--------------------
+#### No images found"
 
 - Check the source directory path
 - Ensure images have supported extensions (.jpg, .jpeg, .png, .webp)
 - Verify directory permissions
 
-"Permission denied"
--------------------
+### "Tshooting: Permission denied"
 
 - Check write permissions for output directory
 - Run with appropriate user permissions
 - Ensure files aren't open in other applications
 
-"Conversion failed"
--------------------
+### Conversion failed"
 
 - Check if source images are corrupted
 - Ensure sufficient disk space
 - Verify image format is supported
 
-"Large file processing"
------------------------
+### Large file processing"
 
 - Monitor system memory usage
 - Process in smaller batches
