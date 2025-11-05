@@ -15,8 +15,8 @@ from .helpers import (
 app = Typer(no_args_is_help=True)
 
 
-@app.command("show")
-def show(
+@app.command("list")
+def list_images(
     source_dir: str = Option(
         ".", "--source-dir", "-s", help="Directory path to look for images"
     ),

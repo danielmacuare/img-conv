@@ -5,6 +5,7 @@ A powerful command-line tool for batch image processing that converts images (JP
 ## TO-DO
 
 - Semantic Versioning
+- Proper Logging
 - Dev Branch
 - Automatic Validation of markdown files.  
 - Python tooling (Ruff, black, basedpyright, etc)
@@ -55,12 +56,12 @@ uv tool install --force .
 
 ```bash
 # Local development (after uv sync)
-uv run img-conv show
+uv run img-conv list
 uv run img-conv convert --source-dir ./images --output-extension webp
 uv run img-conv delete --source-dir ./images
 
 # Global installation (after uv tool install .)
-img-conv show
+img-conv list
 img-conv convert --source-dir ./images --output-extension webp
 img-conv delete --source-dir ./images
 ```
@@ -77,7 +78,7 @@ img-conv delete --source-dir ./images
 
 | Command | Description | Local Development | Global Installation |
 |---------|-------------|-------------------|-------------------|
-| `show` | Display image information | `uv run img-conv show -s ./photos` | `img-conv show -s ./photos` |
+| `list` | Display image information | `uv run img-conv list -s ./photos` | `img-conv list -s ./photos` |
 | `convert` | Convert images to specified format | `uv run img-conv convert -e webp` | `img-conv convert -e webp` |
 | `delete` | Remove images by extension | `uv run img-conv delete -r png -y` | `img-conv delete -r png -y` |
 

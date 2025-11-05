@@ -10,13 +10,13 @@ uv run img-conv <command> [options]
 
 ## Commands
 
-1. Show Command
+1. List Command
 ---------------
 
 Display information about images in a directory.
 
 ```bash
-uv run img-conv show [OPTIONS]
+uv run img-conv list [OPTIONS]
 ```
 
 **Options:**
@@ -26,14 +26,14 @@ uv run img-conv show [OPTIONS]
 **Examples:**
 
 ```bash
-# Show images in current directory
-uv run img-conv show
+# List images in current directory
+uv run img-conv list
 
-# Show images in specific directory
-uv run img-conv show --source-dir ./photos
+# List images in specific directory
+uv run img-conv list --source-dir ./photos
 
 # Using short option
-uv run img-conv show -s ~/Pictures
+uv run img-conv list -s ~/Pictures
 ```
 
 **Output:**
@@ -121,7 +121,7 @@ Basic Image Optimization Workflow
 
 ```bash
 # 1. Check what images you have
-uv run img-conv show -s ./photos
+uv run img-conv list -s ./photos
 
 # 2. Convert to WEBP for optimization
 uv run img-conv convert -s ./photos -e webp
@@ -163,7 +163,7 @@ uv run img-conv delete -r png -y
 Understanding Output
 ====================
 
-Show Command Output
+List Command Output
 -------------------
 
 - **Path**: Directory containing the image
