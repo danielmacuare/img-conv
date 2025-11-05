@@ -12,20 +12,6 @@ from .helpers import (
 )
 
 
-"""
-How to Use
-
-
-## Long Use
-python main.py --help
-
-## Short Use
-
-Typer
-python im.py commands arguments options
-"""
-
-
 app = Typer()
 
 
@@ -34,7 +20,7 @@ def show(
     source_dir: str = Option(
         ".", "--source-dir", "-s", help="Directory path to look for images"
     ),
-    mode: str = "show",
+    mode: str = Option("show", hidden=True),
 ):
     images_info = get_images_info(source_dir)
     show_results(images_info, mode)
@@ -57,7 +43,7 @@ def convert(
         "-e",
         help="Output extension of the files to be converted (WEBP, PNG, JPG)",
     ),
-    mode: str = "convert",
+    mode: str = Option("convert", hidden=True),
 ):
     if not destination_dir:
         destination_dir = source_dir
@@ -79,7 +65,7 @@ def delete(
     source_dir: str = Option(
         ".", "--source-dir", "-s", help="Directory path to look for images"
     ),
-    mode: str = "delete",
+    mode: str = Option("delete", hidden=True),
     remove_extension: str = Option(
         "*",
         "--remove-extension",
@@ -104,8 +90,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    """
- TO-DO
-- Default to convert output on the same directory than the images    
-    """
